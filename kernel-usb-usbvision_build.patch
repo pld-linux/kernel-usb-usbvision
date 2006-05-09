@@ -1,0 +1,22 @@
+diff -urp usbvision.org/src/usbvision.c usbvision/src/usbvision.c
+--- usbvision.org/src/usbvision.c	2005-11-16 08:16:49.000000000 +0100
++++ usbvision/src/usbvision.c	2006-05-09 02:41:59.000000000 +0200
+@@ -334,6 +334,8 @@
+ 	#include <linux/moduleparam.h>
+ 	#include <linux/workqueue.h>
+ 	#include <media/tuner.h>
++	#include <media/v4l2-common.h>
++	#include <media/tuner-types.h>
+ 	#include <media/audiochip.h>
+ #endif
+ 
+@@ -6309,9 +6311,6 @@ static void __devexit usbvision_disconne
+ MODULE_DEVICE_TABLE (usb, usbvision_table);
+ 
+ static struct usb_driver usbvision_driver = {
+-#if LINUX_VERSION_CODE >= KERNEL_VERSION(2,4,31)
+-	.owner		= THIS_MODULE,
+-#endif
+ 	.name		= "usbvision",
+ 	.id_table	= usbvision_table,
+ 	.probe		= usbvision_probe,
