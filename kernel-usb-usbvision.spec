@@ -6,12 +6,12 @@
 %bcond_with	verbose         # verbose build (V=1)
 #
 %define		_snap	20050721
+%define	rel	0.%{_snap}.1
 Summary:	USBvision Linux device driver
 Summary(de):	USBvision Linux Treiber
 Summary(pl):	Sterownik dla Linuksa do urz±dzeñ USBvision
 Name:		kernel-usb-usbvision
 Version:	0.9.8.2
-%define	rel	0.%{_snap}.1
 Release:	%{rel}@%{_kernel_ver_str}
 License:	GPL
 Group:		Base/Kernel
@@ -30,6 +30,11 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 This is a Linux driver for the video grabber USBVision, a USB-only
 cable used in many "webcam" devices. It supports streaming and capture
 of color or monochrome video via the Video4Linux API.
+
+%description -l de
+Dies ist ein Linux Treiber für den Videoabfänger USBVision, der nur
+mit USB Kabel Gereten wie Webcams zusammenarbeitet. Er unterstützt
+Videowiedergabe in Farbe oder Monochrom durch die Video4Linux API.
 
 %description -l pl
 Ten pakiet zawiera sterownik dla Linuksa do urz±dzeñ przechwytuj±cych
@@ -50,6 +55,11 @@ Requires(post,postun):	/sbin/depmod
 This is a Linux SMP driver for the video grabber USBVision, a USB-only
 cable used in many "webcam" devices. It supports streaming and capture
 of color or monochrome video via the Video4Linux API.
+
+%description -n kernel-smp-usb-usbvision -l de
+Dies ist ein Linux SMP Treiber für den Videoabfänger USBVision, der
+nur mit USB Kabel Gereten wie Webcams zusammenarbeitet. Er unterstützt
+Videowiedergabe in Farbe oder Monochrom durch die Video4Linux API.
 
 %description -n kernel-smp-usb-usbvision -l pl
 Ten pakiet zawiera sterownik dla Linuksa SMP do urz±dzeñ
