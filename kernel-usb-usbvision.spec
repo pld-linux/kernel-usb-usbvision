@@ -6,9 +6,9 @@
 %bcond_with	verbose         # verbose build (V=1)
 #
 %define		_snap	20050721
-Summary:	USBvision
-Summary(de):	USBvision
-Summary(pl):	USBvision
+Summary:	USBvision Linux device driver
+Summary(de):	USBvision Linux Treiber
+Summary(pl):	Sterownik dla Linuksa do urz±dzeñ USBvision
 Name:		kernel-usb-usbvision
 Version:	0.9.8.2
 %define	rel	0.%{_snap}.1
@@ -27,31 +27,36 @@ ExclusiveArch:	%{ix86}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-USBvision.
-
-%description -l de
-USBvision.
+This is a Linux driver for the video grabber USBVision, a USB-only
+cable used in many "webcam" devices. It supports streaming and capture
+of color or monochrome video via the Video4Linux API.
 
 %description -l pl
-USBvision.
+Ten pakiet zawiera sterownik dla Linuksa do urz±dzeñ przechwytuj±cych
+obraz USBVision - dzia³ajacego wy³±cznie z USB kabla u¿ywanego w wielu
+urz±dzeniach typu webcam. Obs³uguje strumienie oraz przechwytywanie
+obrazu kolorowego lub monochromatycznego poprzez API Video4Linux.
 
 %package -n kernel-smp-usb-usbvision
-Summary:	USBvision SMP driver
-Summary(de):	USBvsion SMP Treiber
-Summary(pl):	Sterownik SMP USBvision
+Summary:	USBvision Linux SMP device driver
+Summary(de):	USBvision Linux SMP Treiber
+Summary(pl):	Sterownik dla Linuksa SMP do urz±dzeñ USBvision
 Release:	%{rel}@%{_kernel_ver_str}
 Group:		Base/Kernel
 %{?with_dist_kernel:%requires_releq_kernel_up}
 Requires(post,postun):	/sbin/depmod
 
 %description -n kernel-smp-usb-usbvision
-USBvision. SMP driver version.
-
-%description -n kernel-smp-usb-usbvision -l de
-USBvison. SMP Trebier Version.
+This is a Linux SMP driver for the video grabber USBVision, a USB-only
+cable used in many "webcam" devices. It supports streaming and capture
+of color or monochrome video via the Video4Linux API.
 
 %description -n kernel-smp-usb-usbvision -l pl
-USBvision. Wersja dla j±der wieloprocesorowych.
+Ten pakiet zawiera sterownik dla Linuksa SMP do urz±dzeñ
+przechwytuj±cych obraz USBVision - dzia³ajacego wy³±cznie z USB kabla
+u¿ywanego w wielu urz±dzeniach typu webcam. Obs³uguje strumienie oraz
+przechwytywanie obrazu kolorowego lub monochromatycznego poprzez API
+Video4Linux.
 
 %prep
 %setup -q -n usbvision
