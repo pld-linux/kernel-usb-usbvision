@@ -5,19 +5,18 @@
 %bcond_without	smp             # don't build SMP module
 %bcond_with	verbose         # verbose build (V=1)
 #
-%define		_snap	20050721
+%define		_snap	20060524
 %define	rel	0.%{_snap}.1
 Summary:	USBvision Linux device driver
 Summary(de):	USBvision Linux Treiber
 Summary(pl):	Sterownik dla Linuksa do urz±dzeñ USBvision
 Name:		kernel-usb-usbvision
-Version:	0.9.8.2
+Version:	0.9.8.3
 Release:	%{rel}@%{_kernel_ver_str}
 License:	GPL
 Group:		Base/Kernel
-Source0:	usbvision.tar.gz
-# Source0-md5:	a5afbc855fcc619146a4d50e384c37ec
-Patch0:		%{name}_build.patch
+Source0:	usbvision-%{version}-%{_snap}.tar.gz
+# Source0-md5:	46f8067489bacf4c1759416cedf84405
 URL:		http://usbvision.sourceforge.net/
 %{?with_dist_kernel:BuildRequires:	kernel-source >= 2.6.0}
 BuildRequires:	rpmbuild(macros) >= 1.118
@@ -70,7 +69,6 @@ Video4Linux.
 
 %prep
 %setup -q -n usbvision
-%patch0 -p1
 
 %build
 cd src
