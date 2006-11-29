@@ -19,7 +19,7 @@ Source0:	usbvision-%{version}-%{_snap}.tar.gz
 # Source0-md5:	46f8067489bacf4c1759416cedf84405
 URL:		http://usbvision.sourceforge.net/
 %{?with_dist_kernel:BuildRequires:	kernel-source >= 2.6.0}
-BuildRequires:	rpmbuild(macros) >= 1.118
+BuildRequires:	rpmbuild(macros) >= 1.330
 %{?with_dist_kernel:%requires_releq_kernel_up}
 Requires(post,postun):	/sbin/depmod
 ExclusiveArch:	%{ix86}
@@ -71,63 +71,11 @@ Video4Linux.
 %setup -q -n usbvision
 
 %build
-cd src
-%if %{with kernel}
-# kernel module(s)
-for cfg in %{?with_dist_kernel:%{?with_smp:smp} up}%{!?with_dist_kernel:nondist}; do
-	install -d $cfg
-	if [ ! -r "%{_kernelsrcdir}/config-$cfg" ]; then
-		exit 1
-	fi
-	rm -rf o
-	install -d o/include/linux
-	ln -sf %{_kernelsrcdir}/config-$cfg o/.config
-	ln -sf %{_kernelsrcdir}/Module.symvers-$cfg o/Module.symvers
-	ln -sf %{_kernelsrcdir}/include/linux/autoconf-$cfg.h o/include/linux/autoconf.h
-%if %{with dist_kernel}
-	%{__make} -j1 -C %{_kernelsrcdir} O=$PWD/o prepare scripts
-%else
-	install -d o/include/config
-	touch o/include/config/MARKER
-#	ln -sf %{_kernelsrcdir}/include/asm-%{_target_base_arch} include/asm
-%endif
-
-#
-#	patching/creating makefile(s) (optional)
-#
-	%{__make} -C %{_kernelsrcdir} clean \
-		RCS_FIND_IGNORE="-name '*.ko' -o" \
-		SYSSRC=%{_kernelsrcdir} \
-		SYSOUT=$PWD/o \
-		M=$PWD O=$PWD/o \
-		CONFIG_MODULES=y \
-		CONFIG_NET_RADIO=y \
-		%{?with_verbose:V=1}
-	%{__make} -C %{_kernelsrcdir} modules \
-		CC="%{__cc}" CPP="%{__cpp}" \
-		SYSSRC=%{_kernelsrcdir} \
-		SYSOUT=$PWD/o \
-		M=$PWD O=$PWD/o \
-		CONFIG_MODULES=y \
-		CONFIG_NET_RADIO=y \
-		%{?with_verbose:V=1}
-
-	mv *.ko $cfg
-done
-%endif
+%build_kernel_modules -m usbvision,i2c-algo-usb -C src
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/lib/modules/%{_kernel_ver}{,smp}/kernel/drivers/usb/media
-
-%if %{with kernel}
-install src/%{?with_dist_kernel:up}%{!?with_dist_kernel:nondist}/*.ko \
-	$RPM_BUILD_ROOT/lib/modules/%{_kernel_ver}/kernel/drivers/usb/media
-%if %{with smp} && %{with dist_kernel}
-install src/smp/*.ko \
-	$RPM_BUILD_ROOT/lib/modules/%{_kernel_ver}smp/kernel/drivers/usb/media
-%endif
-%endif
+%install_kernel_modules -m src/usbvision,src/i2c-algo-usb -d kernel/drivers/usb/media
 
 %clean
 rm -rf $RPM_BUILD_ROOT
