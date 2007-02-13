@@ -8,8 +8,8 @@
 %define		_snap	20060524
 %define	rel	0.%{_snap}.1
 Summary:	USBvision Linux device driver
-Summary(de.UTF-8):   USBvision Linux Treiber
-Summary(pl.UTF-8):   Sterownik dla Linuksa do urządzeń USBvision
+Summary(de.UTF-8):	USBvision Linux Treiber
+Summary(pl.UTF-8):	Sterownik dla Linuksa do urządzeń USBvision
 Name:		kernel-usb-usbvision
 Version:	0.9.8.3
 Release:	%{rel}@%{_kernel_ver_str}
@@ -43,8 +43,8 @@ obrazu kolorowego lub monochromatycznego poprzez API Video4Linux.
 
 %package -n kernel-smp-usb-usbvision
 Summary:	USBvision Linux SMP device driver
-Summary(de.UTF-8):   USBvision Linux SMP Treiber
-Summary(pl.UTF-8):   Sterownik dla Linuksa SMP do urządzeń USBvision
+Summary(de.UTF-8):	USBvision Linux SMP Treiber
+Summary(pl.UTF-8):	Sterownik dla Linuksa SMP do urządzeń USBvision
 Release:	%{rel}@%{_kernel_ver_str}
 Group:		Base/Kernel
 %{?with_dist_kernel:%requires_releq_kernel_up}
