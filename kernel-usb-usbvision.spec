@@ -9,7 +9,7 @@
 Summary:	USBvision Linux device driver
 Summary(de.UTF-8):	USBvision Linux Treiber
 Summary(pl.UTF-8):	Sterownik dla Linuksa do urządzeń USBvision
-Name:		kernel-usb-usbvision
+Name:		kernel%{_alt_kernel}-usb-usbvision
 Version:	0.9.8.3
 Release:	%{rel}@%{_kernel_ver_str}
 License:	GPL
@@ -17,7 +17,7 @@ Group:		Base/Kernel
 Source0:	usbvision-%{version}-%{_snap}.tar.gz
 # Source0-md5:	46f8067489bacf4c1759416cedf84405
 URL:		http://usbvision.sourceforge.net/
-%{?with_dist_kernel:BuildRequires:	kernel-source >= 2.6.0}
+%{?with_dist_kernel:BuildRequires:	kernel-module-build >= 3:2.6.20.2}
 BuildRequires:	rpmbuild(macros) >= 1.379
 %{?with_dist_kernel:%requires_releq_kernel}
 Requires(post,postun):	/sbin/depmod
